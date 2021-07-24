@@ -1,0 +1,54 @@
+﻿@model AddEventFormModel 
+
+@{ 
+    ViewData["Title"] = "Add Event";
+}
+
+<div class="row">
+    <div class="offset-md-2 col-md-8 col-sm-12">
+        <form method="post">
+            <div class="form-group">
+                <label asp-for="Name"></label>
+                <input asp-for="Name" class="form-control" placeholder="Metallica concert">
+            </div>
+            <div class="form-group">
+                <label asp-for="Description">Example textarea</label>
+                <textarea asp-for="Description" class="form-control" placeholder="A concert of their @DateTime.UtcNow.Year tour" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+                <label asp-for="StartDate"></label>
+                <input asp-for="StartDate" class="form-control" placeholder="dd.mm.yyyy">
+            </div>
+            <div class="form-group">
+                <label asp-for="EndDate"></label>
+                <input asp-for="EndDate" class="form-control" placeholder="dd.mm.yyyy">
+            </div>
+            <div class="form-group">
+                <label asp-for="StartHour"></label>
+                <input asp-for="StartHour" class="form-control" placeholder="hh:mm">
+            </div>
+            <div class="form-group">
+                <label asp-for="EndHour"></label>
+                <input asp-for="EndHour" class="form-control" placeholder="hh:mm">
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageUrl"></label>
+                <input asp-for="ImageUrl" class="form-control" placeholder="Type URL here..">
+            </div>
+            <div class="form-group">
+                <label asp-for="Address"></label>
+                <input asp-for="Address" class="form-control" placeholder="ul. Tsar Ivaylo 4 or Ancient Theatre">
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlSelect1">Example select</label>
+                <select class="form-control" id="exampleFormControlSelect1">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                </select>
+            </div>
+        </form>
+    </div>
+</div>

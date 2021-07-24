@@ -1,5 +1,3 @@
-
-
 namespace PlovdivEventManager
 {
     using Microsoft.AspNetCore.Builder;
@@ -10,6 +8,7 @@ namespace PlovdivEventManager
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
     using PlovdivEventManager.Data;
+    using PlovdivEventManager.Infrastructure;
 
     public class Startup
     {
@@ -23,7 +22,7 @@ namespace PlovdivEventManager
         public void ConfigureServices(IServiceCollection services)
         {
             services
-                .AddDbContext<ApplicationDbContext>(options => options
+                .AddDbContext<PlovdivEventManagerDbContext>(options => options
                     .UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDatabaseDeveloperPageExceptionFilter();
@@ -36,7 +35,7 @@ namespace PlovdivEventManager
                     options.Password.RequireNonAlphanumeric = false;
                     options.Password.RequireUppercase = false;
                 })
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+                .AddEntityFrameworkStores<PlovdivEventManagerDbContext>();
 
             services
                 .AddControllersWithViews();
@@ -44,6 +43,8 @@ namespace PlovdivEventManager
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.PrepareDatabase();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage()
@@ -67,6 +68,8 @@ namespace PlovdivEventManager
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+
+            
         }
     }
 }
