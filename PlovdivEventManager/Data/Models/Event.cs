@@ -15,15 +15,23 @@ namespace PlovdivEventManager.Data.Models
         [Required]
         [StringLength(EventDescriptionMaxLength)]
         public string Description { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
-        public DateTime StartHour { get; set; }
-        public DateTime? EndHour { get; set; }
+        [Required]
+        [StringLength(DateMaxLength)]
+        public string StartDate { get; set; }
+        [Required]
+        [StringLength(DateMaxLength)]
+        public string EndDate { get; set; }
+        [Required]
+        [StringLength(TimeMaxLength)]
+        public string StartHour { get; set; }
+        [StringLength(TimeMaxLength)]
+        public string EndHour { get; set; }
         public int CategoryId { get; set; }
         public Category Category { get; init; }
         [Required]
         [Url]
         public string ImageUrl { get; set; }
+        [StringLength(AddressMaxLength)]
         public string Address { get; set; }
 
     }
