@@ -15,6 +15,7 @@
         public string Description { get; init; }
         [Required]
         [RegularExpression(DateRegexValidation, ErrorMessage = "Invalid start date. Please mind the date format")]
+        //TODO Validate that the date is not before the current moment
         public string StartDate { get; init; }
         [Required]
         [RegularExpression(DateRegexValidation, ErrorMessage = "Invalid start date. Please mind the date format")]
