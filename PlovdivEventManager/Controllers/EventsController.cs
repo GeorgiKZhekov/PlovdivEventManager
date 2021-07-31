@@ -22,6 +22,24 @@
            //Loading the view with the Categories in the dropdown menu
            Categories = this.GetEventCategories()
         });
+
+        public IActionResult All()
+        {
+            var events = this.data
+                .Events
+                .OrderByDescending(c => c.Id)
+                .Select(c => new EventListingViewModel
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                    Description = c.Description,
+                    Category = c.Category.Name,
+                    StartDate = c.StartDate,
+                    ImageUrl = c.ImageUrl
+                }).ToList();
+
+            return View(events);
+        }
         
         [HttpPost]
         public IActionResult Add(AddEventFormModel eventt)
@@ -53,7 +71,7 @@
             this.data.Events.Add(eventtToAdd);
             this.data.SaveChanges();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction(nameof(All));
         }
 
         private IEnumerable<EventCategoryViewModel> GetEventCategories()

@@ -13,6 +13,7 @@
         [Required]
         [StringLength(EventDescriptionMaxLength, MinimumLength = EventDescriptionMinValue, ErrorMessage = "Description must be between {2} and {1} characters")]
         public string Description { get; init; }
+
         [Required]
         [RegularExpression(DateRegexValidation, ErrorMessage = "Invalid start date. Please mind the date format")]
         //TODO Validate that the date is not before the current moment

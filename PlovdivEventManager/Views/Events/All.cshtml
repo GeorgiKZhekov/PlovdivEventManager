@@ -1,0 +1,21 @@
+﻿@model IEnumerable<EventListingViewModel>
+
+<div class="row">
+    @foreach (var eventt in Model)
+    {
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="@eventt.ImageUrl" alt="@eventt.Name">
+            <div class="card-body">
+                <h5 class="card-title">@eventt.Name</h5>
+                <p class="card-text">@eventt.Description</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Category: @eventt.Category</li>
+                <li class="list-group-item">Date: @eventt.StartDate </li>
+            </ul>
+            <div class="card-body">
+                <a asp-controller="Events" asp-action="Details" asp-route-id="@eventt.Id" class="btn btn-primary">View More</a>
+            </div>
+        </div>
+    }
+</div>
