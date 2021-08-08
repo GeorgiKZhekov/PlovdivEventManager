@@ -10,7 +10,7 @@ using PlovdivEventManager.Data;
 namespace PlovdivEventManager.Data.Migrations
 {
     [DbContext(typeof(PlovdivEventManagerDbContext))]
-    [Migration("20210727183349_EventCategoryTables")]
+    [Migration("20210807144105_EventCategoryTables")]
     partial class EventCategoryTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -255,10 +255,9 @@ namespace PlovdivEventManager.Data.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<string>("EndDate")
-                        .IsRequired()
+                    b.Property<DateTime>("EndDate")
                         .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("EndHour")
                         .HasMaxLength(5)
@@ -273,10 +272,9 @@ namespace PlovdivEventManager.Data.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
-                    b.Property<string>("StartDate")
-                        .IsRequired()
+                    b.Property<DateTime>("StartDate")
                         .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("StartHour")
                         .IsRequired()

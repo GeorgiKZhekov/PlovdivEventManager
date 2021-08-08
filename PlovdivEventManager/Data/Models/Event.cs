@@ -1,6 +1,4 @@
-﻿
-
-namespace PlovdivEventManager.Data.Models
+﻿namespace PlovdivEventManager.Data.Models
 {
     using System;
     using System.ComponentModel.DataAnnotations;
@@ -17,10 +15,10 @@ namespace PlovdivEventManager.Data.Models
         public string Description { get; set; }
         [Required]
         [StringLength(DateMaxLength)]
-        public string StartDate { get; set; }
+        public DateTime StartDate { get; set; }
         [Required]
         [StringLength(DateMaxLength)]
-        public string EndDate { get; set; }
+        public DateTime EndDate { get; set; }
         [Required]
         [StringLength(TimeMaxLength)]
         public string StartHour { get; set; }
