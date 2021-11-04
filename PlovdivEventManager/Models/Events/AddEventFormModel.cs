@@ -22,7 +22,7 @@
         //[RegularExpression(DateRegexValidation, ErrorMessage = "Invalid start date. Please mind the date format")]
         public string EndDate { get; init; }
         [Required]
-        //[RegularExpression(HourMinutesRegexValidation, ErrorMessage = "Invalid start hour. Please mind the hour format")]
+        [RegularExpression(HourMinutesRegexValidation, ErrorMessage = "Invalid start hour. Please mind the hour format")]
         public string StartHour { get; init; }
         [RegularExpression(HourMinutesRegexValidation, ErrorMessage = "Invalid start hour. Please mind the hour format")]
         public string EndHour { get; init; }

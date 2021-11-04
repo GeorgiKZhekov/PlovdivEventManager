@@ -16,6 +16,7 @@
         {
             this.data = data;
         }
+        [HttpGet]
         public IActionResult Add() => View(new AddEventFormModel
         {
            //Loading the view with the Categories in the dropdown menu
@@ -60,11 +61,14 @@
         [HttpPost]
         public IActionResult Add(AddEventFormModel eventt)
         {
+            //Adding an error for the case when the category doesn't exist
+            //Adding an error to the model state
             if(!this.data.Categories.Any(e => e.Id == eventt.CategoryId))
             {
                 this.ModelState.AddModelError(nameof(eventt.CategoryId), "Category does not exist!");
             }
 
+            //Checks if all of the requirements are OK and if not takes the categories again and returns the view
             if (!ModelState.IsValid)
             {
                 eventt.Categories = this.GetEventCategories();

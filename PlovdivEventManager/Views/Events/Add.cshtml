@@ -1,52 +1,81 @@
 ﻿@model AddEventFormModel 
 
-@{ 
+@{
     ViewData["Title"] = "Add Event";
 }
 
 <div class="row">
     <div class="offset-md-2 col-md-8 col-sm-12">
+        
+        <h2 class="add-event-heading">Add Event</h2>
+
         <form method="post">
             <div class="form-group">
                 <label asp-for="Name"></label>
-                <input asp-for="Name" class="form-control" placeholder="Metallica concert">
-                <span asp-validation-for="Name" class="small text-danger"></span>
+                <input asp-for="Name"
+                       class="form-control"
+                       placeholder="Metallica concert">
+                <span asp-validation-for="Name"
+                      class="small text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Description"></label>
-                <textarea asp-for="Description" class="form-control" placeholder="A concert of their @DateTime.UtcNow.Year tour" rows="3"></textarea>
+                <textarea asp-for="Description"
+                          minlength="30"
+                          maxlength="200"
+                          class="form-control"
+                          placeholder="A concert of their @DateTime.UtcNow.Year tour"
+                          rows="3"></textarea>
             </div>
+            <span asp-validation-for="Description"
+                  class="small text-danger"></span>
             <div class="form-group">
                 <label asp-for="StartDate"></label>
-                <input asp-for="StartDate" class="form-control" placeholder="mm/dd/yyyy">
+                <input asp-for="StartDate"
+                       class="form-control"
+                       placeholder="mm/dd/yyyy">
             </div>
             <div class="form-group">
                 <label asp-for="EndDate"></label>
-                <input asp-for="EndDate" class="form-control" placeholder="mm/dd/yyyy">
+                <input asp-for="EndDate"
+                       class="form-control"
+                       placeholder="mm/dd/yyyy">
             </div>
             <div class="form-group">
                 <label asp-for="StartHour"></label>
-                <input asp-for="StartHour" class="form-control" placeholder="hh:mm">
+                <input asp-for="StartHour"
+                       class="form-control"
+                       placeholder="hh:mm">
+                <span asp-validation-for="StartHour"
+                      class="small text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="EndHour"></label>
-                <input asp-for="EndHour" class="form-control" placeholder="hh:mm">
+                <input asp-for="EndHour"
+                       class="form-control"
+                       placeholder="hh:mm">
+                <span asp-validation-for="EndHour"
+                      class="small text-danger"></span>
                 <!--End Hour is not required-->
             </div>
             <div class="form-group">
                 <label asp-for="ImageUrl"></label>
-                <input asp-for="ImageUrl" class="form-control" placeholder="Type URL here..">
+                <input asp-for="ImageUrl"
+                       class="form-control"
+                       placeholder="Type URL here..">
             </div>
             <div class="form-group">
                 <label asp-for="Address"></label>
-                <input asp-for="Address" class="form-control" placeholder="ul. Tsar Ivaylo 4 or Ancient Theatre">
+                <input asp-for="Address"
+                       class="form-control"
+                       placeholder="ul. Tsar Ivaylo 4 or Ancient Theatre">
             </div>
             <div class="form-group">
                 <label asp-for="CategoryId"></label>
                 <select asp-for="CategoryId" class="form-control">
                     @foreach (var category in Model.Categories)
                     {
-                    <option value="@category.Id">@category.Name</option>
+                        <option value="@category.Id">@category.Name</option>
                     }
                 </select>
             </div>

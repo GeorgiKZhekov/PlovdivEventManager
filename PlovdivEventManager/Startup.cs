@@ -49,6 +49,7 @@ namespace PlovdivEventManager
             {
                 app.UseDeveloperExceptionPage()
                    .UseMigrationsEndPoint();
+                app.UseBrowserLink();
             }
             else
             {
