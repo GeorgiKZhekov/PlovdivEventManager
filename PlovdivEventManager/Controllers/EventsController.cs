@@ -23,6 +23,7 @@
            Categories = this.GetEventCategories()
         });
 
+        //The models do not bind automatically by get operation that is why the [FromQuery] in front of the model
         public IActionResult All([FromQuery]SearchEventsViewModel query)
         {
             var eventsQuery = this.data.Events.AsQueryable();
@@ -54,7 +55,7 @@
 
             query.Events = events;
             query.Categories = GetEventCategories();
-
+            
             return View(query);
         }
         
@@ -93,6 +94,8 @@
 
             return RedirectToAction(nameof(All));
         }
+
+        //public IActionResult Details
 
         private IEnumerable<EventCategoryViewModel> GetEventCategories()
             //Taking the categories from the database

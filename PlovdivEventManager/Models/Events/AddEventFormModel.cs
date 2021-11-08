@@ -15,11 +15,10 @@
         [StringLength(EventDescriptionMaxLength, MinimumLength = EventDescriptionMinValue, ErrorMessage = "Description must be between {2} and {1} characters")]
         public string Description { get; init; }
         [Required]
-        //[RegularExpression(DateRegexValidation, ErrorMessage = "Invalid start date. Please mind the date format")]
-        //TODO Validate that the date is not before the current moment
+        [RegularExpression(DateRegexValidation, ErrorMessage = "Invalid start date. Please mind the date format")]
         public string StartDate { get; init; }
         [Required]
-        //[RegularExpression(DateRegexValidation, ErrorMessage = "Invalid start date. Please mind the date format")]
+        [RegularExpression(DateRegexValidation, ErrorMessage = "Invalid start date. Please mind the date format")]
         public string EndDate { get; init; }
         [Required]
         [RegularExpression(HourMinutesRegexValidation, ErrorMessage = "Invalid start hour. Please mind the hour format")]
@@ -36,5 +35,6 @@
         [Required]
         //TODO Add a regex for validation of the street address
         public string Address { get; init; }
+
     }
 }

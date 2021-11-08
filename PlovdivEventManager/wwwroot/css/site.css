@@ -76,3 +76,9 @@ body {
     margin-top: 30px;
     margin-bottom: 20px;
 }
+
+/*TODO pagination position*/
+.pagination {
+    margin-bottom: 4px;
+
+}

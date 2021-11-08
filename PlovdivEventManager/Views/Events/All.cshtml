@@ -4,19 +4,26 @@
 <div class="row">
     <form method="get">
         <div class="input-group">
-            <label asp-for="CategoryId"></label>
-            <select asp-for="CategoryId" class="custom-select" id="inputGroupSelect04">
+            <!--TODO bring the label on the top of the sel-->
+            <label class="mr-2 text-center"
+                   asp-for="CategoryId"></label>
+            <select class="mb-4 mr-2 custom-select"
+                    asp-for="CategoryId" id="inputGroupSelect04">
+
+                <option value="">All</option>
+
                 @foreach (var category in Model.Categories)
                 {
                     <option value="@category.Id">@category.Name</option>
                 }
             </select>
-            <label asp-for="Sorting"></label>
-            <select asp-for="Sorting" class="form-control">
+            <label class="mr-2 text-center"
+                   asp-for="Sorting"></label>
+            <select asp-for="Sorting" class="form-control mb-2 custom-select">
                 <option value="0" selected>Date of event</option>
-                <option value="1" selected>Date created</option>
+                <option value="1">Date created</option>
             </select>
-            <div class="input-group-append">
+            <div class="input-group-append mb-4">
                 <button class="btn btn-outline-primary" type="submit">Search</button>
             </div>
         </div>
@@ -45,13 +52,21 @@
     }
 </div>
 
-<nav aria-label="...">
+@{
+    var previousPage = Model.CurrentPage - 1;
+    if (previousPage < 1)
+    {
+        previousPage = 1;
+    }
+}
+
+<nav class="mt-4" aria-label="...">
     <ul class="pagination">
         <li class="page-item">
-            <a class="page-link" asp-controller="Events" asp-action="All" asp-route-currentPage="@(Model.CurrentPage--)">Previous</a>
+            <a class="btn btn-primary @(Model.CurrentPage == 1 ? "disabled" : string.Empty)" asp-controller="Events" asp-action="All" asp-route-currentPage="@(previousPage)">Previous</a>
         </li>
         <li class="page-item">
-            <a class="page-link" asp-controller="Events" asp-action="All" asp-route-currentPage="@(Model.CurrentPage++)">Next</a>
+            <a class="btn btn-primary" asp-controller="Events" asp-action="All" asp-route-currentPage="@(Model.CurrentPage + 1)">Next</a>
         </li>
     </ul>
 </nav>
