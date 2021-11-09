@@ -58,15 +58,37 @@
     {
         previousPage = 1;
     }
+
+    int lastPage;
+
+    if (Model.TotalEvents % 3 == 0)
+    {
+        lastPage = Model.TotalEvents / SearchEventsViewModel.EventsPerPage;
+    }
+    else
+    {
+        lastPage = (Model.TotalEvents / SearchEventsViewModel.EventsPerPage) + 1;
+    }
+
 }
 
 <nav class="mt-4" aria-label="...">
     <ul class="pagination">
         <li class="page-item">
-            <a class="btn btn-primary @(Model.CurrentPage == 1 ? "disabled" : string.Empty)" asp-controller="Events" asp-action="All" asp-route-currentPage="@(previousPage)">Previous</a>
+            <a class="btn btn-primary @(Model.CurrentPage == 1 ? "disabled" : string.Empty)"
+               asp-controller="Events"
+               asp-action="All"
+               asp-route-currentPage="@(previousPage)">
+                Previous
+            </a>
         </li>
         <li class="page-item">
-            <a class="btn btn-primary" asp-controller="Events" asp-action="All" asp-route-currentPage="@(Model.CurrentPage + 1)">Next</a>
+            <a class="btn btn-primary @(Model.CurrentPage == lastPage ? "disabled" : string.Empty)"
+               asp-controller="Events"
+               asp-action="All"
+               asp-route-currentPage="@(Model.CurrentPage + 1)">
+                Next
+            </a>
         </li>
     </ul>
 </nav>

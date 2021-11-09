@@ -11,6 +11,7 @@ namespace PlovdivEventManager.Models.Events
         [Display(Name = "Category")]
         public int CategoryId { get; set; }
         public int CurrentPage { get; set; } = 1;
+        public int TotalEvents { get; set; }
         public IEnumerable<EventCategoryViewModel> Categories { get; set; }
         public IEnumerable<EventListingViewModel> Events { get; set; }
     }
