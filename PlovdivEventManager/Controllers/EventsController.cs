@@ -1,4 +1,8 @@
-﻿namespace PlovdivEventManager.Controllers
+﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
+using PlovdivEventManager.Infrastructure;
+
+namespace PlovdivEventManager.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
     using PlovdivEventManager.Data;
@@ -16,13 +20,23 @@
         {
             this.data = data;
         }
-        [HttpGet]
-        public IActionResult Add() => View(new AddEventFormModel
-        {
-           //Loading the view with the Categories in the dropdown menu
-           Categories = this.GetEventCategories()
-        });
 
+        [HttpGet]
+        [Authorize]
+        public IActionResult Add()
+        {
+            if (!this.UserIsOrganizer())
+            {
+                return RedirectToAction(nameof(OrganizersController.Create),"Create", "Organizers");
+            }
+
+            return View(new AddEventFormModel
+            {
+                //Loading the view with the Categories in the dropdown menu
+                Categories = this.GetEventCategories()
+            });
+        } 
+        
         //The models do not bind automatically by get operation that is why the [FromQuery] in front of the model
         public IActionResult All([FromQuery]SearchEventsViewModel query)
         {
@@ -64,11 +78,17 @@
         }
         
         [HttpPost]
+        [Authorize]
         public IActionResult Add(AddEventFormModel eventt)
         {
+            if (!this.UserIsOrganizer())
+            {
+                return RedirectToAction(nameof(OrganizersController.Create), "Create", "Organizers");
+            }
+
             //Adding an error for the case when the category doesn't exist
             //Adding an error to the model state
-            if(!this.data.Categories.Any(e => e.Id == eventt.CategoryId))
+            if (!this.data.Categories.Any(e => e.Id == eventt.CategoryId))
             {
                 this.ModelState.AddModelError(nameof(eventt.CategoryId), "Category does not exist!");
             }
@@ -100,6 +120,11 @@
         }
 
         //public IActionResult Details
+
+        private bool UserIsOrganizer()
+        => this.data
+            .Organizers
+            .Any(o => o.UserId == this.User.GetId());
 
         private IEnumerable<EventCategoryViewModel> GetEventCategories()
             //Taking the categories from the database

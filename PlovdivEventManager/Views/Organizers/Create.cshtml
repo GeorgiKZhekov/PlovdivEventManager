@@ -1,0 +1,37 @@
+﻿@model BecomeOrganizerFormModel
+
+@{
+    ViewData["Title"] = "Become Organizer";
+}
+
+<div class="row">
+    <div class="offset-md-2 col-md-8 col-sm-12">
+
+        <h2 class="add-event-heading">Become organizer.</h2>
+
+        <form method="post">
+            <div class="form-group">
+                <label asp-for="Name"></label>
+                <input asp-for="Name"
+                       class="form-control">
+                <span asp-validation-for="Name"
+                      class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CompanyName"></label>
+                <input asp-for="CompanyName"
+                       class="form-control">
+                <span asp-validation-for="CompanyName"
+                      class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PhoneNumber"></label>
+                <input asp-for="PhoneNumber"
+                       class="form-control">
+                <span asp-validation-for="PhoneNumber"
+                      class="small text-danger"></span>
+            </div>
+            <input class="btn btn-primary" type="submit" value="Save" />
+        </form>
+    </div>
+</div>

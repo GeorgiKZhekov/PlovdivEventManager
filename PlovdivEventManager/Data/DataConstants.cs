@@ -22,8 +22,10 @@
 
         public class Organizer
         {
+            public const int NameMinLength = 3;
             public const int NameMaxLength = 25;
-            public const int CompanyNameMaxLength = 35;
+            public const int CompanyNameMinLength = 2;
+            public const int CompanyNameMaxLength = 35;         
             public const int PhoneNumberMinLength = 10;
             public const int PhoneNumberMaxLength = 13;
             public const string PhoneNumberRegexValidation = @"^((\+359)|(0)){1}(8){1}[1-9]{1}\d{7}$";
