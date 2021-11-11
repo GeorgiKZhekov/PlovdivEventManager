@@ -1,17 +1,19 @@
-﻿namespace PlovdivEventManager.Data.Models
+﻿using System.Security.Permissions;
+
+namespace PlovdivEventManager.Data.Models
 {
     using System;
     using System.ComponentModel.DataAnnotations;
 
-    using static DataConstants;
+    using static DataConstants.Event;
     public class Event
     {
         public int Id { get; init; }
         [Required]
-        [StringLength(EventNameMaxLength)]
+        [StringLength(NameMaxLength)]
         public string Name { get; set; }
         [Required]
-        [StringLength(EventDescriptionMaxLength)]
+        [StringLength(DescriptionMaxLength)]
         public string Description { get; set; }
         [Required]
         [StringLength(DateMaxLength)]
@@ -31,6 +33,9 @@
         public string ImageUrl { get; set; }
         [StringLength(AddressMaxLength)]
         public string Address { get; set; }
+
+        public int OrganizerId { get; init; }
+        public Organizer Organizer { get; init; }
 
     }
 }

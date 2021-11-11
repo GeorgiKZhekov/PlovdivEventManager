@@ -4,15 +4,15 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    using static Data.DataConstants;
+    using static Data.DataConstants.Event;
     public class AddEventFormModel
     {
         //TODO Add Custom error messages for all the props
         [Required]
-        [StringLength(EventNameMaxLength, MinimumLength = EventNameMinLength, ErrorMessage = "Name must be between {2} and {1} characters")]
+        [StringLength(NameMaxLength, MinimumLength = NameMinLength, ErrorMessage = "Name must be between {2} and {1} characters")]
         public string Name { get; init; }
         [Required]
-        [StringLength(EventDescriptionMaxLength, MinimumLength = EventDescriptionMinValue, ErrorMessage = "Description must be between {2} and {1} characters")]
+        [StringLength(DescriptionMaxLength, MinimumLength = DescriptionMinValue, ErrorMessage = "Description must be between {2} and {1} characters")]
         public string Description { get; init; }
         [Required]
         [RegularExpression(DateRegexValidation, ErrorMessage = "Invalid start date. Please mind the date format")]

@@ -40,7 +40,7 @@
                 EventSorting.DateCreated or _ => eventsQuery.OrderByDescending(e => e.Id)
             };
 
-            int totalEvents = this.data.Events.Count();
+            int totalEvents = eventsQuery.Count();
 
             var events = eventsQuery
                 .Skip((query.CurrentPage - 1) * SearchEventsViewModel.EventsPerPage)
