@@ -1,5 +1,8 @@
 ﻿@model SearchEventsViewModel
 
+@{
+    ViewBag.Title = "All events";
+}
 
 <div class="row">
     <form method="get">
@@ -48,7 +51,7 @@
                     <a asp-controller="Events" asp-action="Details" asp-route-id="@eventt.Id" class="btn btn-primary">View More</a>
                 </div>
             </div>
-        </div>      
+        </div>
     }
 </div>
 

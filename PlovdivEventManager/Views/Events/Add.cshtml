@@ -1,13 +1,13 @@
 ﻿@model AddEventFormModel 
 
 @{
-    ViewData["Title"] = "Add Event";
+    ViewBag.Title = "Add Event";
 }
 
 <div class="row">
     <div class="offset-md-2 col-md-8 col-sm-12">
         
-        <h2 class="add-event-heading">Add Event</h2>
+        <h2 class="add-event-heading">@ViewBag.Title</h2>
 
         <form method="post">
             <div class="form-group">

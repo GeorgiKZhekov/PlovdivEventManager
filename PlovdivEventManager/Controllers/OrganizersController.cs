@@ -1,14 +1,14 @@
-﻿using System.Linq;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using PlovdivEventManager.Data;
-using PlovdivEventManager.Data.Models;
-using PlovdivEventManager.Infrastructure;
-using PlovdivEventManager.Models.Organizers;
-
+﻿
 namespace PlovdivEventManager.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
+    using System.Linq;
+    using Microsoft.AspNetCore.Authorization;
+    using PlovdivEventManager.Data;
+    using PlovdivEventManager.Data.Models;
+    using PlovdivEventManager.Infrastructure;
+    using PlovdivEventManager.Models.Organizers;
+
     public class OrganizersController : Controller
     {
         private readonly PlovdivEventManagerDbContext _data;
@@ -18,12 +18,13 @@ namespace PlovdivEventManager.Controllers
             this._data = data;
         }
 
+        [HttpGet]
         [Authorize]
-        public IActionResult Create() => View();
+        public IActionResult Become() => View();
 
         [HttpPost]
         [Authorize]
-        public IActionResult Create(BecomeOrganizerFormModel organizer)
+        public IActionResult Become(BecomeOrganizerFormModel organizer)
         {
             var userId = this.User.GetId();
 

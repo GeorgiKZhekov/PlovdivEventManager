@@ -1,8 +1,4 @@
-﻿using System.Security.Claims;
-using Microsoft.AspNetCore.Authorization;
-using PlovdivEventManager.Infrastructure;
-
-namespace PlovdivEventManager.Controllers
+﻿namespace PlovdivEventManager.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
     using PlovdivEventManager.Data;
@@ -11,6 +7,8 @@ namespace PlovdivEventManager.Controllers
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Microsoft.AspNetCore.Authorization;
+    using PlovdivEventManager.Infrastructure;
 
     public class EventsController : Controller
     {
@@ -27,7 +25,7 @@ namespace PlovdivEventManager.Controllers
         {
             if (!this.UserIsOrganizer())
             {
-                return RedirectToAction(nameof(OrganizersController.Create),"Create", "Organizers");
+                return RedirectToAction(nameof(OrganizersController.Become), "Organizers", "Become");
             }
 
             return View(new AddEventFormModel
@@ -81,9 +79,15 @@ namespace PlovdivEventManager.Controllers
         [Authorize]
         public IActionResult Add(AddEventFormModel eventt)
         {
-            if (!this.UserIsOrganizer())
+            var organizerId = this.data
+                .Organizers
+                .Where(o => o.UserId == this.User.GetId())
+                .Select(o => o.Id)
+                .FirstOrDefault();
+
+            if (organizerId == 0)
             {
-                return RedirectToAction(nameof(OrganizersController.Create), "Create", "Organizers");
+                return RedirectToAction(nameof(OrganizersController.Become), "Organizers", "Become");
             }
 
             //Adding an error for the case when the category doesn't exist
@@ -111,6 +115,7 @@ namespace PlovdivEventManager.Controllers
                 CategoryId = eventt.CategoryId,
                 ImageUrl = eventt.ImageUrl,
                 Address = eventt.Address,
+                OrganizerId = organizerId
             };
 
             this.data.Events.Add(eventtToAdd);
