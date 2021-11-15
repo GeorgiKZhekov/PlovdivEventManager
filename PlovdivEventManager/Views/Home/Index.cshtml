@@ -91,11 +91,19 @@
 
 <div class="jumbotron">
     <div class="row">
-        <h2 class="col-md-6 text-center">
-            @Model.TotalEvents Events
+        <h2 class="col-md-6 text-center" id="total-events">
         </h2>
-        <h2 class="col-md-6 text-center">
-            @Model.TotalUsers Users
+        <h2 class="col-md-6 text-center" id="total-users">
         </h2>
     </div>
 </div>
+
+@section Scripts{
+    <script>
+        $.get('api/statistics',
+            (data) => {
+                $('#total-events').text(data.totalEvents + " Events");
+                $('#total-users').text(data.totalUsers + " Users")
+            })
+    </script> 
+}

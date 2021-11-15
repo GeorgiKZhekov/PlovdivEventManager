@@ -20,6 +20,7 @@
         public IActionResult Index()
         {
             var totalEvents = this.data.Events.Count();
+            var totalUsers = this.data.Users.Count();
 
             var events = this.data
                 .Events

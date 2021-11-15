@@ -45,7 +45,7 @@
                 eventsQuery = eventsQuery.Where(e =>
                 e.CategoryId == query.CategoryId);
             }
-
+                
             eventsQuery = query.Sorting switch
             {
                 EventSorting.DateOfEvent => eventsQuery.OrderByDescending(e => e.StartDate),
