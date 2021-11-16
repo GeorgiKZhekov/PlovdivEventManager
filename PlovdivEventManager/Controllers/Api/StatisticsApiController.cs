@@ -1,33 +1,22 @@
-﻿using System.Linq;
-using PlovdivEventManager.Data;
-using PlovdivEventManager.Models.Api;
-
-namespace PlovdivEventManager.Controllers.Api
+﻿namespace PlovdivEventManager.Controllers.Api
 {
+    using PlovdivEventManager.Data;
+    using PlovdivEventManager.Services.Statistics;
     using Microsoft.AspNetCore.Mvc;
 
     [ApiController]
     [Route("api/statistics")]
     public class StatisticsApiController : ControllerBase
     {
-        private readonly PlovdivEventManagerDbContext _data;
+        private readonly IStatisticsService _statistics;
 
-        public StatisticsApiController(PlovdivEventManagerDbContext data)
+        public StatisticsApiController(PlovdivEventManagerDbContext data, IStatisticsService statistics)
         {
-            this._data = data;
+            this._statistics = statistics;
         }
 
         [HttpGet]
-        public StatisticsResponseModel GetStatistics()
-        {
-            var totalEvents = this._data.Events.Count();
-            var totalUsers = this._data.Users.Count();
-
-            return new StatisticsResponseModel
-            {
-                TotalEvents = this._data.Events.Count(),
-                TotalUsers = this._data.Users.Count()
-            };
-        }
+        public StatisticsServiceModel GetStatistics() => this._statistics.Total();
+        
     }
 }

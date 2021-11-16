@@ -1,4 +1,6 @@
-﻿namespace PlovdivEventManager.Controllers
+﻿using PlovdivEventManager.Services.Statistics;
+
+namespace PlovdivEventManager.Controllers
 {
     using System.Diagnostics;
     using System.Linq;
@@ -10,17 +12,18 @@
     public class HomeController : Controller
     {
         private readonly PlovdivEventManagerDbContext data;
+        private readonly IStatisticsService _statistics;
 
-        public HomeController(PlovdivEventManagerDbContext data)
+        public HomeController(PlovdivEventManagerDbContext data,
+            IStatisticsService statistics)
         {
             this.data = data;
+            _statistics = statistics;
         }
 
 
         public IActionResult Index()
         {
-            var totalEvents = this.data.Events.Count();
-            var totalUsers = this.data.Users.Count();
 
             var events = this.data
                 .Events
@@ -35,9 +38,12 @@
                 .Take(3)
                 .ToList();
 
+            var totalStatistics = this._statistics.Total();
+
             return View(new IndexViewModel
             {
-                TotalEvents = totalEvents,
+                TotalEvents = totalStatistics.TotalEvents,
+                TotalUsers = totalStatistics.TotalUsers,
                 Events = events
             });
         }

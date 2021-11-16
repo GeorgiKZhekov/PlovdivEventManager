@@ -1,3 +1,5 @@
+using PlovdivEventManager.Services.Statistics;
+
 namespace PlovdivEventManager
 {
     using Microsoft.AspNetCore.Builder;
@@ -39,6 +41,8 @@ namespace PlovdivEventManager
 
             services
                 .AddControllersWithViews();
+
+            services.AddTransient<IStatisticsService, StatisticsService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
