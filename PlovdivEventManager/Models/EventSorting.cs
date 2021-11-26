@@ -1,4 +1,4 @@
-﻿namespace PlovdivEventManager.Models.Events
+﻿namespace PlovdivEventManager.Models
 {
     public enum EventSorting
     {

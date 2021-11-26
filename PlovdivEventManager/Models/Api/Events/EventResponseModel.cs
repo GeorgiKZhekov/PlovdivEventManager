@@ -1,6 +1,6 @@
-﻿namespace PlovdivEventManager.Models.Events
+﻿namespace PlovdivEventManager.Models.Api.Events
 {
-    public class EventListingViewModel
+    public class EventResponseModel
     {
         public int Id { get; init; }
         public string Name { get; init; }

@@ -1,14 +1,17 @@
-﻿namespace PlovdivEventManager.Controllers
+﻿
+
+namespace PlovdivEventManager.Controllers
 {
+    using PlovdivEventManager.Models;
     using Microsoft.AspNetCore.Mvc;
-    using PlovdivEventManager.Data;
+    using Data;
     using PlovdivEventManager.Data.Models;
-    using PlovdivEventManager.Models.Events;
+    using Models.Events;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using Microsoft.AspNetCore.Authorization;
-    using PlovdivEventManager.Infrastructure;
+    using Infrastructure;
 
     public class EventsController : Controller
     {
