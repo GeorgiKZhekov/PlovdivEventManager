@@ -1,4 +1,4 @@
-﻿namespace PlovdivEventManager.Controllers.Api
+﻿ namespace PlovdivEventManager.Controllers.Api
 {
     using PlovdivEventManager.Data;
     using PlovdivEventManager.Services.Statistics;

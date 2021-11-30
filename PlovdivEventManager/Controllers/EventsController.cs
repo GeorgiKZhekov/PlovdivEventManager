@@ -1,8 +1,8 @@
-﻿
+﻿using PlovdivEventManager.Services.Events;
 
 namespace PlovdivEventManager.Controllers
 {
-    using PlovdivEventManager.Models;
+    using Models;
     using Microsoft.AspNetCore.Mvc;
     using Data;
     using PlovdivEventManager.Data.Models;
@@ -15,11 +15,13 @@ namespace PlovdivEventManager.Controllers
 
     public class EventsController : Controller
     {
+        private readonly IEventsService _events;
         private readonly PlovdivEventManagerDbContext data;
 
-        public EventsController(PlovdivEventManagerDbContext data)
+        public EventsController(PlovdivEventManagerDbContext data, IEventsService events)
         {
             this.data = data;
+            this._events = events;
         }
 
         [HttpGet]
@@ -41,39 +43,25 @@ namespace PlovdivEventManager.Controllers
         //The models do not bind automatically by get operation that is why the [FromQuery] in front of the model
         public IActionResult All([FromQuery]SearchEventsViewModel query)
         {
-            var eventsQuery = this.data.Events.AsQueryable();
 
-            if(query.CategoryId != 0)
+            var queryResult = this._events.All(
+                query.CategoryId,
+                query.Sorting,
+                query.CurrentPage,
+                SearchEventsViewModel.EventsPerPage);
+
+            query.Events = queryResult.Events.Select(e => new EventListingViewModel
             {
-                eventsQuery = eventsQuery.Where(e =>
-                e.CategoryId == query.CategoryId);
-            }
-                
-            eventsQuery = query.Sorting switch
-            {
-                EventSorting.DateOfEvent => eventsQuery.OrderByDescending(e => e.StartDate),
-                EventSorting.DateCreated or _ => eventsQuery.OrderByDescending(e => e.Id)
-            };
+                Category = e.Category,
+                Description = e.Description,
+                Id = e.Id,
+                ImageUrl = e.ImageUrl,
+                Name = e.Name,
+                StartDate = e.StartDate
+            });
 
-            int totalEvents = eventsQuery.Count();
-
-            var events = eventsQuery
-                .Skip((query.CurrentPage - 1) * SearchEventsViewModel.EventsPerPage)
-                .Take(SearchEventsViewModel.EventsPerPage)
-                .Select(e => new EventListingViewModel
-                {
-                    Id = e.Id,
-                    Name = e.Name,
-                    Description = e.Description,
-                    Category = e.Category.Name,
-                    StartDate = e.StartDate.ToString("MM/dd/yyyy"),
-                    ImageUrl = e.ImageUrl
-                }).ToList();
-
-
-            query.Events = events;
             query.Categories = GetEventCategories();
-            query.TotalEvents = totalEvents;
+            query.TotalEvents = queryResult.TotalEvents;
             
             return View(query);
         }

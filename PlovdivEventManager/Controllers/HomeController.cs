@@ -5,9 +5,9 @@ namespace PlovdivEventManager.Controllers
     using System.Diagnostics;
     using System.Linq;
     using Microsoft.AspNetCore.Mvc;
-    using PlovdivEventManager.Data;
-    using PlovdivEventManager.Models;
-    using PlovdivEventManager.Models.Home;
+    using Data;
+    using Models;
+    using Models.Home;
 
     public class HomeController : Controller
     {

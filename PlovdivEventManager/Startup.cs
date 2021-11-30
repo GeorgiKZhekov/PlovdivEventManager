@@ -1,4 +1,4 @@
-using PlovdivEventManager.Services.Statistics;
+using PlovdivEventManager.Services.Events;
 
 namespace PlovdivEventManager
 {
@@ -9,8 +9,9 @@ namespace PlovdivEventManager
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
-    using PlovdivEventManager.Data;
-    using PlovdivEventManager.Infrastructure;
+    using Data;
+    using Infrastructure;
+    using Services.Statistics;
 
     public class Startup
     {
@@ -43,6 +44,7 @@ namespace PlovdivEventManager
                 .AddControllersWithViews();
 
             services.AddTransient<IStatisticsService, StatisticsService>();
+            services.AddTransient<IEventsService, EventsService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
